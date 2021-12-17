@@ -10,10 +10,16 @@ public class BaseBlock : MonoBehaviour
     private int XLoc;
     private int YLoc;
 
+    private Transform _transform;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        ownerGrid = FindObjectOfType<PlayGrid>();
+        _transform = transform;
+        // Manipulate with _transform.position += / -= new Vector3(x, y, 0);
+        // Change this as well in the playgrid because we are tracking that
+        // Access the cell array through the ownerGrid, ownerGrid.cells[,]
     }
 
     public void TriggerSimulation()

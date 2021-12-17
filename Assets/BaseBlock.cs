@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BaseBlock : MonoBehaviour
 {
-
+    //Asdf
     private bool blocking = false;
     private bool frozen = false;
     private PlayGrid ownerGrid;
@@ -25,8 +25,11 @@ public class BaseBlock : MonoBehaviour
         _currentState = _states[stateIndex];
 
         // Set the position of the tile
-        XLoc = Mathf.RoundToInt(_currentState.position.x);
-        YLoc = Mathf.RoundToInt(_currentState.position.y);
+        XLoc = Mathf.RoundToInt(_currentState.position.x/ownerGrid.GetCellSize());
+        YLoc = Mathf.RoundToInt(_currentState.position.y/ownerGrid.GetCellSize());
+
+//        _currentState.position.x = XLoc * ownerGrid.GetCellSize();
+//        _currentState.position.y = YLoc * ownerGrid.GetCellSize();
 
         // Set the grid cell to this block
         ownerGrid.cells[XLoc, YLoc] = this;
@@ -47,7 +50,7 @@ public class BaseBlock : MonoBehaviour
 
     public void TriggerCycle()
     {
-        if (!isFrozen())
+        if (!IsFrozen())
         {
             // Increment the state
             IncrementState();

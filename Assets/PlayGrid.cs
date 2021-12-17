@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayGrid : MonoBehaviour
 {
+    public static int XSize;
+    public static int YSize;
 
-    private BaseBlock[,] cells;
-    private int XSize;
-    private int YSize;
+    public BaseBlock[,] cells;
     float CellSize;
 
     public PlayGrid(int x, int y, float size)
@@ -25,7 +25,7 @@ public class PlayGrid : MonoBehaviour
             i.TriggerSimulation();
         }
         foreach (BaseBlock i in cells){
-                i.TriggerCycle();
+            i.TriggerCycle();
         }
 
     }

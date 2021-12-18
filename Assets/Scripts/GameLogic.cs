@@ -8,7 +8,7 @@ public class GameLogic : MonoBehaviour
     public static int height = 25;
     public static float cellSize = 16f;
 
-    public Tile[,] grid = new Tile[width, height];
+    public Tile[,] grid = new Tile[width + 1, height + 1];
     public float moveCooldown = 3f;
     public bool canMove = true;
 
@@ -33,12 +33,17 @@ public class GameLogic : MonoBehaviour
 
     public bool IsGridLocEnterable(int x, int y)
     {
-        if(grid[x, y] == null)
+        // Out of bounds
+        if ((x < 0 || y < 0) || (x > width || y > height))
+        {
+            return false;
+        }
+        if (grid[x, y] == null)
         {
             return true;
         }
         BaseBlock target = grid[x, y].GetCurrentState();
-        if(target == null)
+        if (target == null)
         {
             return true;
         }
@@ -53,7 +58,6 @@ public class GameLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if (moved && canMove), CHECK FOR MOVEMENT HERE
         if (Input.GetKeyDown("f") && canMove)
         {
             canMove = false;

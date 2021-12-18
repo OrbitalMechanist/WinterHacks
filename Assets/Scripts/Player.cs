@@ -39,13 +39,17 @@ public class Player : MonoBehaviour
         transform.position = new Vector2(xPos, yPos);
     }
 
-    private GameLogic _gameLogic;
     private Transform _transform;
 
     // Start is called before the first frame update
     void Start()
     {
-        _gameLogic = FindObjectOfType<GameLogic>();
+        logic = FindObjectOfType<GameLogic>();
+        if (logic == null)
+        {
+            Debug.Log("Unable to find GameLogic");
+        }
+
         _transform = transform;
 
         xPos = Mathf.RoundToInt(_transform.position.x);

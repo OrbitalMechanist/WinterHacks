@@ -13,18 +13,18 @@ public class Tile : MonoBehaviour
     private GameLogic _gameLogic;
     private BaseBlock _currentState;
     private int _stateIndex = 0;
-    private Transform _tranform;
+    private Transform _transform;
 
     // Start is called before the first frame update
     void Start()
     {
         _gameLogic = FindObjectOfType<GameLogic>();
-        _transform = transform;
+        _transform = this.transform;
         _currentState = Instantiate(_states[_stateIndex]);
 
-        xPos = Mathf.RoundToInt(_transform.position.x / _gameLogic.cellSize);
-        yPos = Mathf.RoundToInt(_transform.position.y / _gameLogic.cellSize);
-        _gameLogic.grid[xPos, yPos] = _currentState;
+        xPos = Mathf.RoundToInt(_transform.position.x / GameLogic.cellSize);
+        yPos = Mathf.RoundToInt(_transform.position.y / GameLogic.cellSize);
+        _gameLogic.grid[xPos, yPos] = this;
     }
 
     // Update is called once per frame

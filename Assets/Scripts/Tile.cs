@@ -48,8 +48,6 @@ public class Tile : MonoBehaviour
 
         if (!IsFrozen())
         {
-            // Increment the state
-            IncrementState();
             // Replace the block
             ReplaceBlock();
         }
@@ -63,7 +61,7 @@ public class Tile : MonoBehaviour
 
     private GameObject InstantiateState()
     {
-        return Instantiate(_states[_stateIndex], new Vector3(xPos, yPos, 0), Quaternion.identity);
+        return (_states[_stateIndex] == null) ? null : Instantiate(_states[_stateIndex], new Vector3(xPos, yPos, 0), Quaternion.identity);
     }
 
     public BaseBlock GetCurrentState()
@@ -78,8 +76,14 @@ public class Tile : MonoBehaviour
 
     private void ReplaceBlock()
     {
-        // Destroy the previous state
-        Destroy(_currentState);
+        if (_currentState != null)
+        {
+            // Destroy the previous state
+            Destroy(_currentState);
+        }
+
+        // Increment the state index
+        IncrementState();
 
         // Instantiate a new state and cache it
         _currentState = InstantiateState();

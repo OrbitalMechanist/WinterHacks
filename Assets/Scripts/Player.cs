@@ -34,17 +34,13 @@ public class Player : MonoBehaviour
 
     public void Hop()
     {
-        int direction = 1;
-        if (facing)
-        {
-            direction = -1;
-        }
+        int direction = (facing ? 1 : -1);
         bool directAboveClear = logic.IsGridLocEnterable(xPos, yPos + 1);
         bool sideClear = logic.IsGridLocEnterable(xPos + direction, yPos);
         bool aboveSideClear = logic.IsGridLocEnterable(xPos + direction, yPos + 1);
-        bool aboveTargetClear = logic.IsGridLocEnterable(xPos + direction*2, yPos + 1);
         bool targetClear = logic.IsGridLocEnterable(xPos + direction*2, yPos);
-        if(directAboveClear && sideClear && aboveSideClear && aboveTargetClear && targetClear)
+        bool aboveTargetClear = logic.IsGridLocEnterable(xPos + direction*2, yPos + 1);
+        if(directAboveClear && sideClear && aboveSideClear && targetClear && aboveTargetClear)
         {
             xPos += direction * 2;
         } else if ( directAboveClear && !sideClear && aboveSideClear)
@@ -77,6 +73,7 @@ public class Player : MonoBehaviour
         yPos = Mathf.RoundToInt(_transform.position.y);
     }
 
+    // Null reference here
     private void OnMove(InputValue val)
     {
         if((Vector2)val.Get() == Vector2.right){

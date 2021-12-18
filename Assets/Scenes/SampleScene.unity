@@ -360,6 +360,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -9155172791945955670, guid: 2c238f47462d56a48a64d8291cf6752c, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -9155172791945955670, guid: 2c238f47462d56a48a64d8291cf6752c, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: set_name
       objectReference: {fileID: 0}

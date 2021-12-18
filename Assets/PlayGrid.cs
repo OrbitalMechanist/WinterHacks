@@ -30,6 +30,11 @@ public class PlayGrid : MonoBehaviour
 
     }
 
+    public float GetCellSize()
+    {
+        return CellSize;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

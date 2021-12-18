@@ -15,19 +15,19 @@ public class Player : MonoBehaviour
 
     public void MoveRight()
     {
+        facing = false;
         if (logic.IsGridLocEnterable(xPos + 1, yPos))
         {
             xPos++;
-            facing = false;
             UpdatePositionDisplay();
         }
     }
 
     public void MoveLeft()
     {
+        facing = true;
         if (logic.IsGridLocEnterable(xPos - 1, yPos)) {
             xPos--;
-            facing = true;
             UpdatePositionDisplay();
         }
     }
@@ -82,19 +82,26 @@ public class Player : MonoBehaviour
         if((Vector2)val.Get() == Vector2.right){
             Debug.Log("R");
             MoveRight();
-            return;
-        }
-        if ((Vector2)val.Get() == Vector2.left)
+        }else if ((Vector2)val.Get() == Vector2.left)
         {
             Debug.Log("L");
             MoveLeft();
-            return;
-        }
-        if ((Vector2)val.Get() == Vector2.up)
+        }else if ((Vector2)val.Get() == Vector2.up)
         {
             Debug.Log("U");
             Hop();
-            return;
+        }
+
+        Fall();
+    }
+
+    public void Fall()
+    {
+        while(logic.IsGridLocEnterable(xPos, yPos - 1))
+        {
+            Debug.Log("Falling");
+            yPos--;
+            UpdatePositionDisplay();
         }
     }
 

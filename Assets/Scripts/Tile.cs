@@ -66,6 +66,11 @@ public class Tile : MonoBehaviour
         return Instantiate(_states[_stateIndex], new Vector3(xPos, yPos, 0), Quaternion.identity);
     }
 
+    public BaseBlock GetCurrentState()
+    {
+        return _currentState.GetComponent<BaseBlock>();
+    }
+
     private void IncrementState()
     {
         _stateIndex = (_stateIndex + 1) % _states.Length;

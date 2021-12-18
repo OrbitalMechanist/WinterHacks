@@ -11,11 +11,14 @@ public class Player : MonoBehaviour
     //false is right, true is left
     public bool facing = false;
 
-    public GameLogic logic;
+    private GameLogic logic;
+    private Transform _transform;
+    [SerializeField] private Animator _anim;
 
     public void MoveRight()
     {
         facing = false;
+        _transform.localScale = new Vector3(1f, 1f, 1f);
         if (logic.IsGridLocEnterable(xPos + 1, yPos))
         {
             xPos++;
@@ -26,6 +29,7 @@ public class Player : MonoBehaviour
     public void MoveLeft()
     {
         facing = true;
+        _transform.localScale = new Vector3(-1f, 1f, 1f);
         if (logic.IsGridLocEnterable(xPos - 1, yPos)) {
             xPos--;
             UpdatePositionDisplay();
@@ -60,8 +64,6 @@ public class Player : MonoBehaviour
     {
         transform.position = new Vector2(xPos, yPos);
     }
-
-    private Transform _transform;
 
     // Start is called before the first frame update
     void Start()

@@ -34,16 +34,21 @@ public class Player : MonoBehaviour
 
     public void Hop()
     {
-        int direction = (facing ? 1 : -1);
+        int direction = (facing ? -1 : 1);
         bool directAboveClear = logic.IsGridLocEnterable(xPos, yPos + 1);
         bool sideClear = logic.IsGridLocEnterable(xPos + direction, yPos);
         bool aboveSideClear = logic.IsGridLocEnterable(xPos + direction, yPos + 1);
         bool targetClear = logic.IsGridLocEnterable(xPos + direction*2, yPos);
         bool aboveTargetClear = logic.IsGridLocEnterable(xPos + direction*2, yPos + 1);
-        if(directAboveClear && sideClear && aboveSideClear && targetClear && aboveTargetClear)
+        if (directAboveClear && sideClear && aboveSideClear && aboveTargetClear)
         {
+            if (!targetClear)
+            {
+                yPos++;
+            }
             xPos += direction * 2;
-        } else if ( directAboveClear && !sideClear && aboveSideClear)
+        }
+        else if ( directAboveClear && !sideClear && aboveSideClear)
         {
             xPos += direction;
             yPos++;
@@ -76,14 +81,21 @@ public class Player : MonoBehaviour
     // Null reference here
     private void OnMove(InputValue val)
     {
-        if((Vector2)val.Get() == Vector2.right){
+        Debug.Log(val.ToString());
+        if (val == null)
+        {
+            return;
+        }
+        if ((Vector2)val.Get() == Vector2.right){
             Debug.Log("R");
             MoveRight();
-        }else if ((Vector2)val.Get() == Vector2.left)
+        }
+        else if ((Vector2)val.Get() == Vector2.left)
         {
             Debug.Log("L");
             MoveLeft();
-        }else if ((Vector2)val.Get() == Vector2.up)
+        }
+        else if ((Vector2)val.Get() == Vector2.up)
         {
             Debug.Log("U");
             Hop();

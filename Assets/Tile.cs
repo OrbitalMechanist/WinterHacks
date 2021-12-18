@@ -53,6 +53,11 @@ public class Tile : MonoBehaviour
         return frozen;
     }
 
+    public BaseBlock GetCurrentState()
+    {
+        return _currentState;
+    }
+
     private void IncrementState()
     {
         _stateIndex = (_stateIndex + 1) % _states.Length;

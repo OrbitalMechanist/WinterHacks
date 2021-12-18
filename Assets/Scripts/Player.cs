@@ -8,28 +8,49 @@ public class Player : MonoBehaviour
     public int xPos;
     public int yPos;
 
+    //false is right, true is left
+    public bool facing = false;
+
     public GameLogic logic;
 
     public void MoveRight()
     {
-        if (logic.grid[xPos + 1, yPos] == null)
+        if (logic.IsGridLocEnterable(xPos + 1, yPos))
         {
             xPos++;
-        } else if(!logic.grid[xPos + 1, yPos].GetCurrentState().IsBlocking())
-        {
-            xPos++;
+            facing = false;
+            UpdatePositionDisplay();
         }
-        UpdatePositionDisplay();
     }
 
     public void MoveLeft()
     {
-        if (logic.grid[xPos - 1, yPos] == null)
-        {
+        if (logic.IsGridLocEnterable(xPos - 1, yPos)) {
             xPos--;
-        } else if (!logic.grid[xPos - 1, yPos].GetCurrentState().IsBlocking())
+            facing = true;
+            UpdatePositionDisplay();
+        }
+    }
+
+    public void Hop()
+    {
+        int direction = 1;
+        if (facing)
         {
-            xPos--;
+            direction = -1;
+        }
+        bool directAboveClear = logic.IsGridLocEnterable(xPos, yPos + 1);
+        bool sideClear = logic.IsGridLocEnterable(xPos + direction, yPos);
+        bool aboveSideClear = logic.IsGridLocEnterable(xPos + direction, yPos + 1);
+        bool aboveTargetClear = logic.IsGridLocEnterable(xPos + direction*2, yPos + 1);
+        bool targetClear = logic.IsGridLocEnterable(xPos + direction*2, yPos);
+        if(directAboveClear && sideClear && aboveSideClear && aboveTargetClear && targetClear)
+        {
+            xPos += direction * 2;
+        } else if ( directAboveClear && !sideClear && aboveSideClear)
+        {
+            xPos += direction;
+            yPos++;
         }
         UpdatePositionDisplay();
     }
@@ -67,6 +88,12 @@ public class Player : MonoBehaviour
         {
             Debug.Log("L");
             MoveLeft();
+            return;
+        }
+        if ((Vector2)val.Get() == Vector2.up)
+        {
+            Debug.Log("U");
+            Hop();
             return;
         }
     }

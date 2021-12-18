@@ -31,6 +31,20 @@ public class GameLogic : MonoBehaviour
         }
     }
 
+    public bool IsGridLocEnterable(int x, int y)
+    {
+        if(grid[x, y] == null)
+        {
+            return true;
+        }
+        BaseBlock target = grid[x, y].GetCurrentState();
+        if(target == null)
+        {
+            return true;
+        }
+        return !target.IsBlocking();
+    }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -9,9 +9,9 @@ public class Tile : MonoBehaviour
 
     private bool frozen = false;
 
-    [SerializeField] private BaseBlock[] _states;
+    [SerializeField] private GameObject[] _states;
     private GameLogic _gameLogic;
-    private BaseBlock _currentState;
+    private GameObject _currentState;
     private int _stateIndex = 0;
     private Transform _transform;
 
@@ -19,11 +19,12 @@ public class Tile : MonoBehaviour
     void Start()
     {
         _gameLogic = FindObjectOfType<GameLogic>();
-        _transform = this.transform;
-        _currentState = Instantiate(_states[_stateIndex]);
+        _transform = transform;
 
-        xPos = Mathf.RoundToInt(_transform.position.x / GameLogic.cellSize);
-        yPos = Mathf.RoundToInt(_transform.position.y / GameLogic.cellSize);
+        xPos = Mathf.RoundToInt(_transform.position.x);
+        yPos = Mathf.RoundToInt(_transform.position.y);
+
+        _currentState = InstantiateState();
         _gameLogic.grid[xPos, yPos] = this;
     }
 
@@ -35,10 +36,16 @@ public class Tile : MonoBehaviour
     public void TriggerSimulation()
     {
         // Physics like falling
+        return;
     }
 
     public void TriggerCycle()
     {
+        if (_states.Length <= 1)
+        {
+            return;
+        }
+
         if (!IsFrozen())
         {
             // Increment the state
@@ -50,7 +57,13 @@ public class Tile : MonoBehaviour
 
     public bool IsFrozen()
     {
+     
         return frozen;
+    }
+
+    private GameObject InstantiateState()
+    {
+        return Instantiate(_states[_stateIndex], new Vector3(xPos, yPos, 0), Quaternion.identity);
     }
 
     private void IncrementState()
@@ -64,6 +77,6 @@ public class Tile : MonoBehaviour
         Destroy(_currentState);
 
         // Instantiate a new state and cache it
-        _currentState = Instantiate(_states[_stateIndex]);
+        _currentState = InstantiateState();
     }
 }

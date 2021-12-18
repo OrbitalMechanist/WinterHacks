@@ -47,7 +47,7 @@ public class BaseBlock : MonoBehaviour
 
     public void TriggerCycle()
     {
-        if (!isFrozen())
+        if (!IsFrozen())
         {
             // Increment the state
             IncrementState();

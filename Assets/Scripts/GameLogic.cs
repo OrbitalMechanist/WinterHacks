@@ -12,7 +12,7 @@ public class GameLogic : MonoBehaviour
     public float moveCooldown = 3f;
     public bool canMove = true;
 
-    void TriggerContents()
+    public void TriggerContents()
     {
         foreach(Tile tile in grid)
         {

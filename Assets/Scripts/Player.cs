@@ -102,8 +102,8 @@ public class Player : MonoBehaviour
             Debug.Log("U");
             Hop();
         }
-
         Fall();
+        logic.TriggerContents();
     }
 
     public void Fall()

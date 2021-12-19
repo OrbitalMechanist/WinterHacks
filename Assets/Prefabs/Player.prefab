@@ -47,7 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   xPos: 0
   yPos: 0
-  logic: {fileID: 0}
+  facing: 0
+  _anim: {fileID: 0}
 --- !u!114 &-9155172791945955670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,7 +139,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 00dceeac38d30df449b13836831c6097, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bd1b04108a640aa4787f632ec1e2e3de, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -66,6 +66,10 @@ public class Tile : MonoBehaviour
 
     public BaseBlock GetCurrentState()
     {
+        if(_currentState == null)
+        {
+            return null;
+        }
         return _currentState.GetComponent<BaseBlock>();
     }
 
